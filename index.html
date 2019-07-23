@@ -172,8 +172,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在SSM框架中，用户输入的URL地址首先经过WEB.XML配置，规定交由controller层处理。controller层首先拦截URL地址，再根据此地址来匹配相应的函数，从而进行基础页面的跳转或者其他逻辑处理。JSP页面可以通过ajax来和controller层的函数进行参数的传递，两者间是相互的，均可以接收/传递参数。<br>controller层方法通过在方法中写入bean作为形参，以此来接收ajax里json格式的数据（一般为json格式，也可以是别的），SSM框架自动将bean里的字段与json数据中的key一一对应传值。此json数据可以直接通过serialize()直接将用户的数据序列化而获得，也可以仅抓取页面中对应id中的值。另一方面，controller层通过map以key-value的形式，put值出去，再通过@ResponseBody注解自动转换为json格式的数据，传给ajax里的data。</p>
-
+        <p>在SSM框架中，用户输入的URL地址首先经过WEB.XML配置，规定交由controller层处理。controller层首先拦截URL地址，再根据此地址来匹配相应的函数，从而进行基础页面的跳转或者
+        
+          <a class="article-more-a" href="/2019/07/22/my-first-blog/#more">more >></a>
+        
       
 
       
