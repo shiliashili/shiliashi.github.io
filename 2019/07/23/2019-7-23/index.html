@@ -6,19 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>2019-7-23 | 交流小站</title>
+  <title>SSM上传图片功能的实现 | 交流小站</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="ceshi">
+  <meta name="description" content="实现保存用户上传图片功能，将图片地址存入数据库中，用户上传的图片存在服务器里。在controller层，需要接收到用户上传的图片，然后将其保存至服务器。采用springmvc的MultipartFile接口来接收前台传来的图片，需要用到MultipartFile接口的getOriginalFilename()方法来获取文件名，再根据需求将文件名变成需要的格式，最后依旧是通过MultipartFil">
+<meta name="keywords" content="图片上传">
 <meta property="og:type" content="article">
-<meta property="og:title" content="2019-7-23">
+<meta property="og:title" content="SSM上传图片功能的实现">
 <meta property="og:url" content="http://yoursite.com/2019/07/23/2019-7-23/index.html">
 <meta property="og:site_name" content="交流小站">
-<meta property="og:description" content="ceshi">
+<meta property="og:description" content="实现保存用户上传图片功能，将图片地址存入数据库中，用户上传的图片存在服务器里。在controller层，需要接收到用户上传的图片，然后将其保存至服务器。采用springmvc的MultipartFile接口来接收前台传来的图片，需要用到MultipartFile接口的getOriginalFilename()方法来获取文件名，再根据需求将文件名变成需要的格式，最后依旧是通过MultipartFil">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-23T07:42:18.775Z">
+<meta property="og:image" content="http://yoursite.com/2019/07/23/2019-7-23/getOriginalFilename.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/23/2019-7-23/tansferTo.png">
+<meta property="og:updated_time" content="2019-07-24T05:51:38.730Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="2019-7-23">
-<meta name="twitter:description" content="ceshi">
+<meta name="twitter:title" content="SSM上传图片功能的实现">
+<meta name="twitter:description" content="实现保存用户上传图片功能，将图片地址存入数据库中，用户上传的图片存在服务器里。在controller层，需要接收到用户上传的图片，然后将其保存至服务器。采用springmvc的MultipartFile接口来接收前台传来的图片，需要用到MultipartFile接口的getOriginalFilename()方法来获取文件名，再根据需求将文件名变成需要的格式，最后依旧是通过MultipartFil">
+<meta name="twitter:image" content="http://yoursite.com/2019/07/23/2019-7-23/getOriginalFilename.png">
   
     <link rel="alternative" href="/atom.xml" title="交流小站" type="application/atom+xml">
   
@@ -161,12 +165,18 @@
         
   
     <h1 class="article-title" itemprop="name">
-      2019-7-23
+      SSM上传图片功能的实现
     </h1>
   
 
         
-        <a href="/2019/07/23/2019-7-23/" class="archive-article-date">
+        
+        <!-- 不蒜子统计 -->
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
+<a href="/2019/07/23/2019-7-23/" class="archive-article-date">
   	<time datetime="2019-07-23T07:41:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-23</time>
 </a>
         
@@ -174,7 +184,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>ceshi</p>
+        <p>实现保存用户上传图片功能，将图片地址存入数据库中，用户上传的图片存在服务器里。<br>在controller层，需要接收到用户上传的图片，然后将其保存至服务器。采用springmvc的MultipartFile接口来接收前台传来的图片，需要用到MultipartFile接口的getOriginalFilename()方法来获取文件名，再根据需求将文件名变成需要的格式，<br><img src="/2019/07/23/2019-7-23/getOriginalFilename.png" alt><br>最后依旧是通过MultipartFile接口下的transferTo(File file)方法来存储图片。<br><img src="/2019/07/23/2019-7-23/tansferTo.png" alt></p>
 
       
 
@@ -209,6 +219,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">图片上传</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -339,6 +360,18 @@
     </div>
   </div>
 </footer>
+
+        <!-- 不蒜子统计 -->
+        <span id="busuanzi_container_site_pv">
+                本站总访问量<span id="busuanzi_value_site_pv"></span>次
+        </span>
+        <span class="post-meta-divider">|</span>
+        <span id="busuanzi_container_site_uv" style='display:none'>
+                本站访客数<span id="busuanzi_value_site_uv"></span>人
+        </span>
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
     </div>
     <script>
 	var yiliaConfig = {
@@ -412,6 +445,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">图片上传</a>
+              </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">SSM ajax</a>
