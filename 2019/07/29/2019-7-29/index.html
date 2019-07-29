@@ -6,15 +6,27 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2019/7 | 交流小站</title>
+  <title>springboot和jpa | 交流小站</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="交流小站">
-<meta property="og:url" content="http://yoursite.com/archives/2019/07/index.html">
+  <meta name="description" content="springboot里的jpa，和SSM中的mybatis一样，都是用来方便数据库操作的。不同的是，在SSM中数据库表只能通过mysql创建，而在springboot中只需要写相应的java代码，springboot便会自动去创建对应的数据库表（和django类似）。使用jpa连接数据库，第一步就是配置application.properties文件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="springboot和jpa">
+<meta property="og:url" content="http://yoursite.com/2019/07/29/2019-7-29/index.html">
 <meta property="og:site_name" content="交流小站">
+<meta property="og:description" content="springboot里的jpa，和SSM中的mybatis一样，都是用来方便数据库操作的。不同的是，在SSM中数据库表只能通过mysql创建，而在springboot中只需要写相应的java代码，springboot便会自动去创建对应的数据库表（和django类似）。使用jpa连接数据库，第一步就是配置application.properties文件">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/07/29/2019-7-29/application.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/29/2019-7-29/pom.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/29/2019-7-29/pojo.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/29/2019-7-29/dao.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/29/2019-7-29/controller.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/29/2019-7-29/jsp.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/29/2019-7-29/result.png">
+<meta property="og:updated_time" content="2019-07-29T06:26:03.201Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="交流小站">
+<meta name="twitter:title" content="springboot和jpa">
+<meta name="twitter:description" content="springboot里的jpa，和SSM中的mybatis一样，都是用来方便数据库操作的。不同的是，在SSM中数据库表只能通过mysql创建，而在springboot中只需要写相应的java代码，springboot便会自动去创建对应的数据库表（和django类似）。使用jpa连接数据库，第一步就是配置application.properties文件">
+<meta name="twitter:image" content="http://yoursite.com/2019/07/29/2019-7-29/application.png">
   
     <link rel="alternative" href="/atom.xml" title="交流小站" type="application/atom+xml">
   
@@ -150,128 +162,186 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-2019-7-29" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      springboot和jpa
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
+
+        
+        
+        <!-- 不蒜子统计 -->
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
 <a href="/2019/07/29/2019-7-29/" class="archive-article-date">
   	<time datetime="2019-07-29T01:40:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-29</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/29/2019-7-29/">springboot和jpa</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>springboot里的jpa，和SSM中的mybatis一样，都是用来方便数据库操作的。不同的是，在SSM中数据库表只能通过mysql创建，而在springboot中只需要写相应的java代码，springboot便会自动去创建对应的数据库表（和django类似）。<br>使用jpa连接数据库，第一步就是配置application.properties文件<a id="more"></a><br><img src="/2019/07/29/2019-7-29/application.png" alt></p>
+<p>然后在pom.xml里增加对mysql和jpa的支持（注意mysql的版本与本机电脑所装相对应）。<br><img src="/2019/07/29/2019-7-29/pom.png" alt></p>
+<p>做完这些配置步骤之后，就可以陆续开始写实体类、DAO层、控制层、JSP页面了。<br>举个例子：<br>实体类：在pojo包下创建一个实例类Category。<br><img src="/2019/07/29/2019-7-29/pojo.png" alt></p>
+<p>DAO层：在dao包下创建Category接口，继承JpaRepository。<br><img src="/2019/07/29/2019-7-29/dao.png" alt></p>
+<p>控制层：在web包下创建CategoryController类。<br><img src="/2019/07/29/2019-7-29/controller.png" alt></p>
+<p>jsp页面：<br><img src="/2019/07/29/2019-7-29/jsp.png" alt></p>
+<p>运行结果：<br><img src="/2019/07/29/2019-7-29/result.png" alt><br>（因为实体类内建立的是一个新表，所以没数据）</p>
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/zhifubao.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/07/29/2019-7-29/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2019/07/23/2019-7-23/" class="archive-article-date">
-  	<time datetime="2019-07-23T07:41:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-23</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/07/23/2019-7-23/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">SSM上传图片功能的实现</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/23/2019-7-23/">SSM上传图片功能的实现</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">图片上传</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    目录，不存在的…
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2019/07/22/my-first-blog/" class="archive-article-date">
-  	<time datetime="2019-07-22T06:35:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-22</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/22/my-first-blog/">JSP页面与controller层之间的参数传递（基于SSM框架）</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">SSM ajax</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
+
+  
 
 
           </div>
@@ -306,8 +376,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
