@@ -6,23 +6,15 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>SSM上传图片功能的实现 | 交流小站</title>
+  <title>Tag: set方法 | 交流小站</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="实现保存用户上传图片功能，将图片地址存入数据库中，用户上传的图片存在服务器里。在controller层，需要接收到用户上传的图片，然后将其保存至服务器。采用springmvc的MultipartFile接口来接收前台传来的图片，需要用到MultipartFile接口的getOriginalFilename()方法来获取文件名，再根据需求将文件名变成需要的格式，最后依旧是通过MultipartFil">
-<meta name="keywords" content="图片上传">
-<meta property="og:type" content="article">
-<meta property="og:title" content="SSM上传图片功能的实现">
-<meta property="og:url" content="http://yoursite.com/2019/07/23/2019-7-23/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="交流小站">
+<meta property="og:url" content="http://yoursite.com/tags/set方法/index.html">
 <meta property="og:site_name" content="交流小站">
-<meta property="og:description" content="实现保存用户上传图片功能，将图片地址存入数据库中，用户上传的图片存在服务器里。在controller层，需要接收到用户上传的图片，然后将其保存至服务器。采用springmvc的MultipartFile接口来接收前台传来的图片，需要用到MultipartFile接口的getOriginalFilename()方法来获取文件名，再根据需求将文件名变成需要的格式，最后依旧是通过MultipartFil">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2019/07/23/2019-7-23/getOriginalFilename.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/23/2019-7-23/tansferTo.png">
-<meta property="og:updated_time" content="2019-07-24T05:51:38.730Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SSM上传图片功能的实现">
-<meta name="twitter:description" content="实现保存用户上传图片功能，将图片地址存入数据库中，用户上传的图片存在服务器里。在controller层，需要接收到用户上传的图片，然后将其保存至服务器。采用springmvc的MultipartFile接口来接收前台传来的图片，需要用到MultipartFile接口的getOriginalFilename()方法来获取文件名，再根据需求将文件名变成需要的格式，最后依旧是通过MultipartFil">
-<meta name="twitter:image" content="http://yoursite.com/2019/07/23/2019-7-23/getOriginalFilename.png">
+<meta name="twitter:title" content="交流小站">
   
     <link rel="alternative" href="/atom.xml" title="交流小站" type="application/atom+xml">
   
@@ -152,200 +144,61 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-2019-7-23" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      SSM上传图片功能的实现
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2019" class="archive-year">2019</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	
+<a href="/2019/08/05/2019-8-5/" class="archive-article-date">
+  	<time datetime="2019-08-05T01:41:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-05</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2019/08/05/2019-8-5/">controller层的参数接收</a>
     </h1>
   
 
-        
-        
-        <!-- 不蒜子统计 -->
-        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
-              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
-        </span>
-
-<a href="/2019/07/23/2019-7-23/" class="archive-article-date">
-  	<time datetime="2019-07-23T07:41:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>实现保存用户上传图片功能，将图片地址存入数据库中，用户上传的图片存在服务器里。<br>在controller层，需要接收到用户上传的图片，然后将其保存至服务器。采用springmvc的MultipartFile接口来接收前台传来的图片，需要用到MultipartFile接口的getOriginalFilename()方法来获取文件名，再根据需求将文件名变成需要的格式，<br><img src="/2019/07/23/2019-7-23/getOriginalFilename.png" alt><br>最后依旧是通过MultipartFile接口下的transferTo(File file)方法来存储图片。<br><img src="/2019/07/23/2019-7-23/tansferTo.png" alt></p>
-
-      
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="/img/zhifubao.png">
-                      <span class="reward-type">支付宝</span>
-                    </div>
-                    
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">图片上传</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">set方法</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/07/23/2019-7-23/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2019/07/29/2019-7-29/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          springboot和jpa
-        
-      </div>
-    </a>
   
   
-    <a href="/2019/07/22/my-first-blog/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">JSP页面与controller层之间的参数传递（基于SSM框架）</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-        <div class="toc-container tooltip-left">
-            <i class="icon-font icon-category"></i>
-            <div class="tooltip tooltip-east">
-                <span class="tooltip-item">
-                </span>
-                <span class="tooltip-content">
-                    <div class="toc-article">
-                    目录，不存在的…
-                    </div>
-                </span>
-            </div>
-        </div>
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
-
-  
-
-  
+    
 
 
           </div>
@@ -380,9 +233,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
