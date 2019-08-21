@@ -19,7 +19,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/07/30/2019-7-30/conn.png">
 <meta property="og:image" content="http://yoursite.com/2019/07/30/2019-7-30/construct.png">
 <meta property="og:image" content="http://yoursite.com/2019/07/30/2019-7-30/static.png">
-<meta property="og:updated_time" content="2019-07-30T08:57:57.974Z">
+<meta property="og:updated_time" content="2019-08-21T00:36:07.331Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="类中静态，非静态，构造方法的执行顺序">
 <meta name="twitter:description" content="今天在写代码时遇到一个很有趣的情况，如下图 提示不能对非静态字段进行静态引用。但是如果将这段代码写在构造方法里，却并不会报错。">
@@ -181,7 +181,7 @@
       
         <p>今天在写代码时遇到一个很有趣的情况，如下图<br><img src="/2019/07/30/2019-7-30/conn.png" alt></p>
 <p>提示不能对非静态字段进行静态引用。但是如果将这段代码写在构造方法里，却并不会报错。<a id="more"></a><br><img src="/2019/07/30/2019-7-30/construct.png" alt></p>
-<p>其实这个问题与构造函数，main方法无关，主要是static修饰的原因，因为JVM的限制，main方法必须是static的，所以当出现非静态引用时就会提示此报错。那么话又说回来，为什么不可以对非静态字段/方法进行静态引用呢？那是因为，static修饰的变量是在类初始化的时候（指类加载器把字节码文件加载到内存中）就直接加载，而非静态变量则是在对象初始化的时候才加载（得先初始化，才可以new对象）。也就是说，静态变量/方法是在非静态变量/方法之前被加载的，而且只加载一次。由于加载顺序的不同，所以不可以在对非静态变量进行静态引用。下面是网上看到的经典代码，理解一下，加深一下印象。<br><img src="/2019/07/30/2019-7-30/static.png" alt></p>
+<p>其实这个问题与构造函数，main方法无关，主要是static修饰的原因，因为JVM的限制，main方法必须是static的，所以当出现非静态引用时就会提示此报错。那么话又说回来，为什么不可以对非静态字段/方法进行静态引用呢？那是因为，static修饰的变量是在类初始化的时候（指类加载器把字节码文件加载到内存中）就直接加载，而非静态变量则是在对象初始化的时候才加载（得先初始化，才可以new对象）。也就是说，静态变量/方法是在非静态变量/方法之前被加载的，而且只加载一次。由于加载顺序的不同，所以不可以在对非静态变量进行静态引用。下面是网上看到的经典代码，理解一下，加深一下印象。<br><img src="/2019/07/30/2019-7-30/static.png" alt><br>简单解释一下，首先运行主函数，第一句执行创建新的实例t1,此时类Test被加载，静态变量、非静态变量、构造方法被分别放在3个队列依次执行。在静态变量队列，字段首先全部被分配至各个内存空间（此时int类型默认值为0，其他类型默认值为null），然后再依次执行赋值，且静态变量只会被加载一次。下面逐行分析输出语句：<br>第一行，程序将k赋值为0（虽然k默认值也为0），然后将t11变成实例化对象，从这步又进入Test类中，但是此时静态变量已被加载，所以按照非静态变量的队列顺序，依次执行，故执行到public int j=print(“j”)这句，随后打印<br>第二行，继续执行非静态变量所打印出的结果。。。<br>第三行，执行完非静态变量后，执行了构造方法，打印出的结果<br>第四至六行，此时所有变量均执行完毕，回到静态变量队列，继续往下走，执行public static Test t21 = new Test(“t2”),和1<del>3行类似。。<br>第七行，执行public static int i = print(“i”)…<br>第八行，执行静态块。。<br>第九至十一行，此时静态变量队列里的元素已经全部加载完毕，依次执行非静态变量队列。注意第11行执行构造方法时，传入的变量是主函数里的Test t1=new Test(“t1”)中的”t1”，此行代码至此执行完毕。<br>第十二至十四行，执行的是主函数里的Test t2 = new Test(“t2”),加载Test新建对象，因为静态变量已被加载完毕，所以执行顺序如9</del>11行。<br>总结：1<del>8行在初始化Test类，9</del>14行是实现主函数里的新建两个实例对象。</p>
 <p>这个结果充分说明了静态变量-&gt;非静态变量-&gt;构造方法这一顺序。（可以按照此顺序理解为对应的abc三条队列，每条队列里都会按照顺序执行，但是在执行a队列时可能会跳转到b队列，在执行完b队列后，任然会返回之前的a队列）注意在Test类字段中，创建了自己的对象，这是因为加了static修饰，因为静态变量只会被加载一次然后放到内存中，如果不加static则会进入死循环。</p>
 
       
@@ -462,15 +462,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SSM ajax</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">static,构造函数</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">set方法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">SSM ajax</a>
               </li>
             
             <div class="clearfix"></div>
