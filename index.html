@@ -153,7 +153,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/23/2019-12-23/">2019-12-23</a>
+      <a class="article-title" href="/2019/12/23/2019-12-23/">nginx小计</a>
     </h1>
   
 
@@ -170,14 +170,10 @@
         <p>最近在做nginx内网、外网相关配置，遇到一些问题，现在记录分享一下。<br>首先目的是为了实现内网地址端口的映射，比如用8081端口来负载映射到8082、8083、8084等其他端口，简单的根据url来location一下。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">	listen  8081;</span><br><span class="line">	server_name localhost;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">location /abc &#123;</span><br><span class="line">	proxy_pass http://login;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>页面是实现了，但是页面上点击登录按钮进行跳转的时候却出错了，报一个“400 Bad Request The plain HTTP request was sent to HTTPS port”的错误。（登录按钮post请求的地址也是在）原来是没有配置proxy_set_header,在遇到302转发的时候，导致头信息丢失。默认跳转到了443(ssl)端口。于是加上了相应配置，变成：        </p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">location /abc &#123;</span><br><span class="line">	proxy_pass http://login;</span><br><span class="line">	proxy_set_header Host <span class="variable">$host</span>:<span class="variable">$server_port</span>;</span><br><span class="line">	proxy_set_header X-Real-IP <span class="variable">$remote_addr</span>;</span><br><span class="line">	proxy_set_header X-Real-PORT <span class="variable">$remote_port</span>;</span><br><span class="line">	proxy_set_header X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这下内网环境是可以了，但是外网访问时，出现了端口错误。比如原本外网地址访问的端口是8888，在没有进行nginx配置前，点击登录跳转到的也是8888，但当我配置了nginx以后，居然外网地址的端口变成了8080，且https变成了http。原来外网地址在遇到转发时，也可以手动设置相应地址，于是加上相应配置，变成：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">	location /abc &#123;</span><br><span class="line">    port_in_redirect on;</span><br><span class="line">	proxy_redirect http://xxxx.xx.xx:8081/abc/ https://xxxx.xx.xx:8888/abc/;</span><br><span class="line">	proxy_pass http://login;</span><br><span class="line">	proxy_set_header Host <span class="variable">$host</span>:<span class="variable">$server_port</span>;</span><br><span class="line">	proxy_set_header X-Real-IP <span class="variable">$remote_addr</span>;</span><br><span class="line">	proxy_set_header X-Real-PORT <span class="variable">$remote_port</span>;</span><br><span class="line">	proxy_set_header X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这下终于成功了，其实nginx有许多配置，很多时候在不了解nginx的情况下直接拿来用，就会发生各种各样的错误，文中进行的一些配置读者可以自行了解详细，这里就不多做介绍，这篇文章记录一下走过的坑。</p>
-
+<p>页面是实现了，但是页面上点击登录按钮进行跳转的时候却出错了，报一个“400 Bad Request The plain HTTP request was sent to HTTPS port”的错误。（登录按钮post请求的地址也是在）原来是没有配置proxy_set_header,在遇到302转发的时候，导致头信息丢失。默认跳转到了443(ssl)端口。于是加上了相应配置，变成：</p>
+        
+          <a class="article-more-a" href="/2019/12/23/2019-12-23/#more">more >></a>
+        
       
 
       
@@ -185,6 +181,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">nginx</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -240,8 +247,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>golang作为“21世纪的C语言”，可以不熟练，但得读得懂。<br>golang在创造的时候，借鉴了许多语言。简单聊一聊golang和其他语言的不同之处：<br>    1、“零值”：golang里当一个变量被声明后，系统自动赋予它该类型的“零值”，若是字符串则为“”，int则为0，指针则为nil。java里分基本类型和引用类型，基本类型会分配初始值（内存），所有引用类型都为null。golang除了指针，其余基本类型变量都会在声明时分配内存。<br>    2、代码规范：与java不同的是，golang有一套严格代码规范，包括命名标准和代码格式。同时，多余的代码（未使用的变量、包等）会直接报错。<br>    3、指针：golang有指针，但是不可以直接对指针进行++等操作。<br>    4、switch语句：golang的的switch不需要break，golang会在执行完相应case条件后自动退出，如果在执行完分值代码后，还希望继续执行后续分支的代码，可以使用fallthrough关键字来达到目的。<br>    5、返回值：golang的函数（方法）可以有多个返回值，而java只能有一个。<br>    6、切片：golang的切片是引用类型，对切片的操作会改变原来的值，所以不要用指针来指向它。python的切片则是new一个新的对象。<br>    7、结构体：和面向对象语言不同的是，golang是没有“类”这种概念的，为了实现相似的目的，golang采用了结构体。在golang里，生成一个结构体实例也是通过new来实现。（创建一个map则只用make，因为new返回的是指针地址，而make直接分配内存）</p>
-
+        <p>golang作为“21世纪的C语言”，可以不熟练，但得读得懂。<br>golang在创造的时候，借鉴了许多语言。简单聊一聊golang和其他语言的不同之处：<br>    1、“零值”：golang里当一个变量被声明后，系统自动赋予它该类型的“零值”，若是字符串则为“”，int则为0，指针则为nil。java里分基本类型和引用类型，基本类型会分配初始值（内存），所有引用类型都为null。golang除了指针，其余基本类型变量都会在声明时分配内存。</p>
+        
+          <a class="article-more-a" href="/2019/11/28/2019-11-28/#more">more >></a>
+        
       
 
       
@@ -304,8 +313,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>最近在看hadoop,简单来聊一下nn(namenode),2nn(secondarynode),dn(datanode)。<br>首先说一下nn和2nn，二者的工作是相互配合的。nn中的元数据都是存储在内存中的，nn在启动时首先将数据加载到内存中（即加载编辑日志（个Edits）和镜像文件（FsImage）），客户端发送增删改数据请求，namenode收到请求后，首先将操作指令更新到日志中，更新滚动日志后，才执行实际操作，在内存中进行增删改。<br>而2nn的存在就是维护编辑日志和镜像文件。2nn有一个触发条件（定时时间到，或者Edits中数据存满），当满足条件时2nn就会执行checkpoint：将nn中的编辑日志和镜像文件复制过来（即内存中，此时nn中滚动生成新的编辑文件，并将新的客户端操作写在其中），加载并合并，生成新的镜像文件，替换掉nn中的镜像文件。<br>dn（dataname）的工作机制很简单，dn主要以数据块的形式存储数据，每个数据块都含有数据、数据长度、校验和、时间戳。dn在启动后，会首先向nn注册，nn返回注册成功后，dn每个周期（默认1h）向nn上报所有块信息。dn和nn保持一个3秒的心跳。超过10分钟30秒没有收到心跳，nn就认为此dn不可用。</p>
-
+        <p>最近在看hadoop,简单来聊一下nn(namenode),2nn(secondarynode),dn(datanode)。<br>首先说一下nn和2nn，二者的工作是相互配合的。nn中的元数据都是存储在内存中的，nn在启动时首先将数据加载到内存中（即加载编辑日志（个Edits）和镜像文件（FsImage）），客户端发送增删改数据请求，namenode收到请求后，首先将操作指令更新到日志中，更新滚动日志后，才执行实际操作，在内存中进行增删改。</p>
+        
+          <a class="article-more-a" href="/2019/09/03/2019-9-3/#more">more >></a>
+        
       
 
       
@@ -847,6 +858,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">nginx</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">set方法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">static,构造函数</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">图片上传</a>
               </li>
              
@@ -855,19 +878,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">static,构造函数</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">set方法</a>
+                <a href="javascript:void(0)" class="js-tag color2">hadoop</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">SSM ajax</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">hadoop</a>
               </li>
             
             <div class="clearfix"></div>

@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="交流小站">
 <meta property="og:description" content="最近在看hadoop,简单来聊一下nn(namenode),2nn(secondarynode),dn(datanode)。首先说一下nn和2nn，二者的工作是相互配合的。nn中的元数据都是存储在内存中的，nn在启动时首先将数据加载到内存中（即加载编辑日志（个Edits）和镜像文件（FsImage）），客户端发送增删改数据请求，namenode收到请求后，首先将操作指令更新到日志中，更新滚动日志后">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-03T09:28:14.721Z">
+<meta property="og:updated_time" content="2019-12-24T00:08:43.480Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于hadoop里nn,2nn,dn工作机制">
 <meta name="twitter:description" content="最近在看hadoop,简单来聊一下nn(namenode),2nn(secondarynode),dn(datanode)。首先说一下nn和2nn，二者的工作是相互配合的。nn中的元数据都是存储在内存中的，nn在启动时首先将数据加载到内存中（即加载编辑日志（个Edits）和镜像文件（FsImage）），客户端发送增删改数据请求，namenode收到请求后，首先将操作指令更新到日志中，更新滚动日志后">
@@ -175,7 +175,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>最近在看hadoop,简单来聊一下nn(namenode),2nn(secondarynode),dn(datanode)。<br>首先说一下nn和2nn，二者的工作是相互配合的。nn中的元数据都是存储在内存中的，nn在启动时首先将数据加载到内存中（即加载编辑日志（个Edits）和镜像文件（FsImage）），客户端发送增删改数据请求，namenode收到请求后，首先将操作指令更新到日志中，更新滚动日志后，才执行实际操作，在内存中进行增删改。<br>而2nn的存在就是维护编辑日志和镜像文件。2nn有一个触发条件（定时时间到，或者Edits中数据存满），当满足条件时2nn就会执行checkpoint：将nn中的编辑日志和镜像文件复制过来（即内存中，此时nn中滚动生成新的编辑文件，并将新的客户端操作写在其中），加载并合并，生成新的镜像文件，替换掉nn中的镜像文件。<br>dn（dataname）的工作机制很简单，dn主要以数据块的形式存储数据，每个数据块都含有数据、数据长度、校验和、时间戳。dn在启动后，会首先向nn注册，nn返回注册成功后，dn每个周期（默认1h）向nn上报所有块信息。dn和nn保持一个3秒的心跳。超过10分钟30秒没有收到心跳，nn就认为此dn不可用。</p>
+        <p>最近在看hadoop,简单来聊一下nn(namenode),2nn(secondarynode),dn(datanode)。<br>首先说一下nn和2nn，二者的工作是相互配合的。nn中的元数据都是存储在内存中的，nn在启动时首先将数据加载到内存中（即加载编辑日志（个Edits）和镜像文件（FsImage）），客户端发送增删改数据请求，namenode收到请求后，首先将操作指令更新到日志中，更新滚动日志后，才执行实际操作，在内存中进行增删改。<a id="more"></a><br>而2nn的存在就是维护编辑日志和镜像文件。2nn有一个触发条件（定时时间到，或者Edits中数据存满），当满足条件时2nn就会执行checkpoint：将nn中的编辑日志和镜像文件复制过来（即内存中，此时nn中滚动生成新的编辑文件，并将新的客户端操作写在其中），加载并合并，生成新的镜像文件，替换掉nn中的镜像文件。<br>dn（dataname）的工作机制很简单，dn主要以数据块的形式存储数据，每个数据块都含有数据、数据长度、校验和、时间戳。dn在启动后，会首先向nn注册，nn返回注册成功后，dn每个周期（默认1h）向nn上报所有块信息。dn和nn保持一个3秒的心跳。超过10分钟30秒没有收到心跳，nn就认为此dn不可用。</p>
 
       
 
@@ -447,6 +447,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">nginx</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">set方法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">static,构造函数</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">图片上传</a>
               </li>
              
@@ -455,19 +467,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">static,构造函数</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">set方法</a>
+                <a href="javascript:void(0)" class="js-tag color2">hadoop</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">SSM ajax</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">hadoop</a>
               </li>
             
             <div class="clearfix"></div>
